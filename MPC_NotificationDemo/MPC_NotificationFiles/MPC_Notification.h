@@ -1,9 +1,9 @@
 //
 //  MPC_Notification.h
 
-//
 //  Created by Michael Critchley on 8/15/16.
 //  Copyright © 2016 Michael Critchley. All rights reserved.
+//  Free to use, share, tweak and twist.
 
 /***********
 

@@ -12,8 +12,11 @@
   If you include an image asset, use either a 36 x 36 image (at 3 resolutions) or a single pdf vector image. 
  
   Defaults:
+
   Pass nil as the image argument if you want only text.
+
   Pass nil for the background color if you want the default burgundy color
+
   Pass nil for the text color for white text
  
  **Don't forget to display the view after creating it. The view is added to the view hierarchy when instantiated and is not deallocated until after it has been displayed 

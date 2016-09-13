@@ -1,6 +1,7 @@
  
 
- To use:
+ <h3>To use:</h3>
+ 
   1. Locate and copy the MPC_Notification.h and .m files. in this repo (or from the downloaded / cloned repo) at: MPC_NotificationDemo > MPC_NotificationFiles
  
   2. Import the .h file into your error handler class.
@@ -9,11 +10,11 @@
  
   4. Display the alert view: [alert display];
  
-  The display will auto dismiss after 4.0 seconds. Any UIGesture will also trigger a dismiss.
+  **The display will auto dismiss after 4.0 seconds. Any UIGesture will also trigger a dismiss.
   
-  If you include an image asset, use either a 36 x 36 image (at 3 resolutions) or a single pdf vector image. 
+  **If you include an image asset, use either a 36 x 36 image (at 3 resolutions) or a single pdf vector image. 
  
-  Defaults:
+<h3>Defaults:</h3>
 
   Pass nil as the image argument if you want only text.
 

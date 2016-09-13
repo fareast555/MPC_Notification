@@ -15,6 +15,7 @@
 		2715DCA41D87CC5D007F66DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2715DCA21D87CC5D007F66DB /* LaunchScreen.storyboard */; };
 		2715DCAF1D87CC5D007F66DB /* MPC_NotificationDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2715DCAE1D87CC5D007F66DB /* MPC_NotificationDemoTests.m */; };
 		2715DCBA1D87CC5D007F66DB /* MPC_NotificationDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2715DCB91D87CC5D007F66DB /* MPC_NotificationDemoUITests.m */; };
+		2715DCC91D87D34F007F66DB /* MPC_Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2715DCC81D87D34F007F66DB /* MPC_Notification.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		2715DCB51D87CC5D007F66DB /* MPC_NotificationDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MPC_NotificationDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2715DCB91D87CC5D007F66DB /* MPC_NotificationDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPC_NotificationDemoUITests.m; sourceTree = "<group>"; };
 		2715DCBB1D87CC5D007F66DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2715DCC71D87D34F007F66DB /* MPC_Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPC_Notification.h; path = MPC_NotificationDemo/MPC_NotificationFiles/MPC_Notification.h; sourceTree = "<group>"; };
+		2715DCC81D87D34F007F66DB /* MPC_Notification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MPC_Notification.m; path = MPC_NotificationDemo/MPC_NotificationFiles/MPC_Notification.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,8 @@
 		2715DC881D87CC5D007F66DB = {
 			isa = PBXGroup;
 			children = (
+				2715DCC71D87D34F007F66DB /* MPC_Notification.h */,
+				2715DCC81D87D34F007F66DB /* MPC_Notification.m */,
 				2715DC931D87CC5D007F66DB /* MPC_NotificationDemo */,
 				2715DCAD1D87CC5D007F66DB /* MPC_NotificationDemoTests */,
 				2715DCB81D87CC5D007F66DB /* MPC_NotificationDemoUITests */,
@@ -271,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2715DC9C1D87CC5D007F66DB /* ViewController.m in Sources */,
+				2715DCC91D87D34F007F66DB /* MPC_Notification.m in Sources */,
 				2715DC991D87CC5D007F66DB /* AppDelegate.m in Sources */,
 				2715DC961D87CC5D007F66DB /* main.m in Sources */,
 			);

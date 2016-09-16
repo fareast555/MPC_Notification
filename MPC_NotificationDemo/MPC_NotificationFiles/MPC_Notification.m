@@ -29,7 +29,13 @@
                     textColor:(UIColor *)textColor
 {
 
-    //1. Set global variables.
+    //1. Make sure another view is not in the heirarchy
+    UIView *view = [[[[UIApplication sharedApplication]delegate]window] viewWithTag:5];
+    if (view) {
+        return nil;
+    }
+    
+    //2. Set global variables.
     self.alertImage = alertImage ? alertImage : nil;
     self.textColor = textColor ? textColor : [UIColor whiteColor];
     self.alertHeight = 64;
@@ -37,10 +43,10 @@
     self.textXOffset = self.alertImage ? 64 : 15; //Slides text to left if no image
     self.viewWasDismissed = NO; //Flag set when dismiss is called
     
-    //2. Call to super using main window width
+    //3. Call to super using main window width
     if (self = [super initWithFrame:CGRectMake(0, -self.alertHeight, self.viewWidth, self.alertHeight)])
     {
-        //3. Build view
+        //4. Build view
         self.backgroundColor = backgroundColor ? backgroundColor : [UIColor colorWithRed:0.733 green:0.192 blue:0.357 alpha:1];
         
         if (self.alertImage) {
@@ -51,8 +57,9 @@
         [self addSubview:[self message:alertMessage]];
         [self addGestureRecognizer:[self tap]];
         [self addGestureRecognizer:[self pan]];
+        [self setTag:5];
         
-        //4. Add the subview to the application window
+        //5. Add the subview to the application window
         [[[[UIApplication sharedApplication] delegate] window] addSubview:self];
         
     }
@@ -106,19 +113,18 @@
 
 - (void)display
 {
-    //Move the status bar below the view
+    //1. Move the status bar below the view
     [self _statusBarToBottom];
     
-    //Slide down the alert
+    //2. Slide down the alert
     [UIView animateWithDuration:0.5 animations:^{
        
         CGRect shiftFrame = self.frame;
         shiftFrame.origin.y +=self.alertHeight;
         self.frame = shiftFrame;
-        
     }];
     
-    //Start dismiss timer
+    //3. Call dismiss timer
     [self _timedDismiss];
 }
 
@@ -133,15 +139,15 @@
 
 - (void)_dismissView:(id)gesture
 {
-    //Return if dismissed has been called
+    //1. Return if dismissed has been called
     if (self.viewWasDismissed) {
         return;
     } else self.viewWasDismissed = YES;
     
-    //Get main queue for UI update
+    //2. Get main queue for UI update
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        //Slide up the view and call for cleanup
+        //3. Slide up the view and call for cleanup
         [UIView animateWithDuration:0.5 animations:^{
             
             CGRect shiftFrame = self.frame;
@@ -153,7 +159,7 @@
         }];
     });
     
-    //Make status bar visible near the end of the animation
+    //4. Make status bar visible near the end of the animation
     [self performSelector:@selector(_statusBarToTop) withObject:nil afterDelay:0.3];
     
 }

@@ -27,7 +27,10 @@
     MPC_Notification *imageAlert = [[MPC_Notification alloc]initWithTitle:@"Alert with an image!" message:@"No network connection" alertImage:[UIImage imageNamed:@"alertExclamation"] backgroundColor:nil textColor:nil];
     
     //2. Display alert
-    [imageAlert display];
+    if (imageAlert) {
+         [imageAlert display];
+    }
+   
     
 }
 
@@ -36,7 +39,10 @@
     
     MPC_Notification *imageAlert = [[MPC_Notification alloc]initWithTitle:@"Alert with no image!" message:@"Error explanation etc here" alertImage:nil backgroundColor:nil textColor:nil];
     
-    [imageAlert display];
+    if (imageAlert) {
+        [imageAlert display];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

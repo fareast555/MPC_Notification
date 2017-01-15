@@ -9,11 +9,6 @@
 #import "ViewController.h"
 #import "MPC_Notification.h"
 
-
-@interface ViewController ()
-
-@end
-
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -24,25 +19,27 @@
 - (IBAction)alertWithImage:(id)sender {
     
     //1. Create the notification
-    MPC_Notification *imageAlert = [[MPC_Notification alloc]initWithTitle:@"Alert with an image!" message:@"No network connection" alertImage:[UIImage imageNamed:@"alertExclamation"] backgroundColor:nil textColor:nil];
+    MPC_Notification *imageAlert = [[MPC_Notification alloc]initWithTitle:@"Alert with an awesome image"
+                                                                  message:@"No network connection \nSecond line here"
+                                                               alertImage:[UIImage imageNamed:@"alertExclamation"]
+                                                              displayTime:2.0];
     
     //2. Display alert
     if (imageAlert) {
          [imageAlert display];
     }
-   
-    
 }
 
 
 - (IBAction)alertNoImage:(id)sender {
     
-    MPC_Notification *imageAlert = [[MPC_Notification alloc]initWithTitle:@"Alert with no image!" message:@"Error explanation etc here" alertImage:nil backgroundColor:nil textColor:nil];
-    
+    MPC_Notification *imageAlert = [[MPC_Notification alloc]initWithTitle:@"Alert with no image!"
+                                                                  message:@"Error explanation etc here \nSecond line here"
+                                                               alertImage:nil
+                                                              displayTime:2.0];
     if (imageAlert) {
         [imageAlert display];
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {

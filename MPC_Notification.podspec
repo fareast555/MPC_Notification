@@ -14,7 +14,7 @@ spec.ios.deployment_target = '9.0'
 spec.requires_arc = true
 
 
-spec.source_files = 'MPC_Notification/MPC_NotificationDemo/MPC_NotificationFiles/MPC_Notification.{h,m}'
+spec.source_files = 'MPC_NotificationDemo/MPC_NotificationFiles/MPC_Notification.{h,m}'
 
 spec.frameworks = 'UIKit'
 end

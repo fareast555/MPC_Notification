@@ -125,7 +125,7 @@
 
 - (UILabel *)_message:(NSString *)alertMessage
 {
-    self.messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.textXOffset, 32, self.frame.size.width-(self.textXOffset + 10), 40)];
+    self.messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.textXOffset, 32, self.frame.size.width-(self.textXOffset + 10), 20)];
     self.messageLabel.numberOfLines = self.titleLabel ? 1 : 2;
     [self.messageLabel setText:alertMessage];
     [self.messageLabel setTextColor:[UIColor whiteColor]];

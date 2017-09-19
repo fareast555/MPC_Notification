@@ -18,6 +18,10 @@
  The MPC_Notification will display slide down alerts similar to a UILocalNotification. The image is optional and is passed to the class when you instantiate it. The title and subtitle text are customizable, as is the textColor and backgroundColor.
  
  To show your alert, call [myMPCNotification display]. Do not set your instance of MPC_Notification to your hierarchy directly.
+ 
+ Subscribe to the delegate by adding <MPC_NotificationDelegate> after the interface declaration of your calling class. 
+ Then set myNotificationView.delegate = self.
+ Finally, implement the delegate method in your class, - (void) userDidTapMPC_NotificationView:
 
  If you include an image asset, use either a 36 x 36 image (including 2x and 3x resolutions) or a single pdf vector image.
 
@@ -27,7 +31,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MPC_Notification;
+
+@protocol MPC_NotificationDelegate <NSObject>
+
+- (void)userDidTapMPC_NotificationView:(MPC_Notification * _Nullable)MPC_Notification;
+
+@end
+
 @interface MPC_Notification : UIView
+
+//Conform to the delegate if you wish to be alerted when the user taps the view
+@property (weak, nonatomic) id<MPC_NotificationDelegate>delegate;
 
 /**
  Set properties after creating an instance of MPC_Notification in the calling controller.
@@ -46,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
                    alertImage:(UIImage * _Nullable)alertImage //@1x image should be 36px X 36px.
                   displayTime:(CGFloat) displayTime;
 /**
- Display the alert view. The display will auto dismiss after "displayTime" seconds has passed. Any user-initiated UIGesture will also dismiss the alert.
+ Displays the alert view. The display will auto dismiss after "displayTime" seconds has passed. Any user-initiated UIGesture will also dismiss the alert.
  */
 - (void) display;
 

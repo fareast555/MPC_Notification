@@ -15,6 +15,7 @@
 
 #import "MPC_Notification.h"
 
+
 @interface MPC_Notification ()
 
 @property (strong, nonatomic) UILabel *titleLabel;
@@ -152,14 +153,30 @@
 
 - (UITapGestureRecognizer *)tap
 {
-    return [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(_dismissView:)];
+    return [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(_userGestureDetected:)];
 }
 
 - (UIPanGestureRecognizer *)pan
 {
-    return [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(_dismissView:)];
+    return [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(_userGestureDetected:)];
 }
 
+#pragma mark - Informing delegate of user action
+- (void)_userGestureDetected:(UIGestureRecognizer *)gesture
+{
+    //1. Limit pan gesture recognition to initial gesture state
+    if ([gesture isKindOfClass:[UIPanGestureRecognizer class]] && gesture.state != UIGestureRecognizerStateBegan)
+        return;
+    
+    //2. Update delegate on main queue
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.delegate userDidTapMPC_NotificationView:self];
+        
+        //3. Call to dismiss self, passing the gesture recognizer
+        [self _dismissView:gesture];
+    });
+    
+}
 
 #pragma mark - Display and Dismiss notification view
 
@@ -189,10 +206,12 @@
 
 - (void)_dismissView:(id)gesture
 {
+    
     //1. Return if dismissed has been called
     if (self.viewWasDismissed) {
         return;
     } else self.viewWasDismissed = YES;
+    
     
     //2. Get main queue for UI update
     dispatch_async(dispatch_get_main_queue(), ^{

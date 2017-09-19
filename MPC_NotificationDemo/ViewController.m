@@ -9,6 +9,10 @@
 #import "ViewController.h"
 #import "MPC_Notification.h"
 
+@interface ViewController ()<MPC_NotificationDelegate>
+
+@end;
+
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -24,12 +28,21 @@
                                                                alertImage:[UIImage imageNamed:@"alertExclamation"]
                                                               displayTime:2.0];
     
-    //2. Display alert
+    //2. You can choose to set the delegate to receive a callback if the user taps the view
+    imageAlert.delegate = self;
+    
+    //3. Display alert
     if (imageAlert) {
          [imageAlert display];
     }
 }
 
+#pragma mark - MPC_NotificationDelegate
+- (void)userDidTapMPC_NotificationView:(MPC_Notification *)MPC_Notification
+{
+    NSLog(@"%s called", __FUNCTION__);
+    //This would be the place to push or present another view if necessary.
+}
 
 - (IBAction)alertNoImage:(id)sender {
     
@@ -37,14 +50,14 @@
                                                                   message:@"Error explanation etc here \nSecond line here"
                                                                alertImage:nil
                                                               displayTime:2.0];
+    
+    //You can choose to set the delegate to receive a callback if the user taps the view
+    imageAlert.delegate = self;
+    
     if (imageAlert) {
         [imageAlert display];
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

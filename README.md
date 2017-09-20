@@ -30,6 +30,8 @@ pod 'MPC_Notification', '~> 0.1.0'
   **The display will auto dismiss after the display time is reached. Any UIGesture will also trigger a dismiss.
   
   **If you include an image asset, use either a 36 x 36 image (at 3 resolutions) or a single pdf vector image. 
+
+  ** To receive a callback when the user taps or pans the notifification, subscribe to the delegate by adding <MPC_NotificationDelegate> after the interface declaration of your calling class. Then set myNotificationView.delegate = self. Finally, implement the delegate method in your class, - (void) userDidTapMPC_NotificationView:
  
 <h3>Defaults:</h3>
 

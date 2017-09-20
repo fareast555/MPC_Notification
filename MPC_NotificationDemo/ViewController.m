@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "MPC_Notification.h"
 
-@interface ViewController ()<MPC_NotificationDelegate>
+@interface ViewController () <MPC_NotificationDelegate>
 
 @end;
 

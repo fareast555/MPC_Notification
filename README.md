@@ -26,12 +26,15 @@ pod 'MPC_Notification', '~> 0.2.0'
   2. Instantiate the view: MPC_Notification *alert = [[MPC_Notification alloc]initWithTitle:message:alertImage:backgroundColor:textColor:];
  
   3. Display the alert view: if (alert) [alert display]; Do not add this alert to your own hierarchy. The alert will do everything for you.
+
+  4. For a delegate callback on tap or pan gestures:
+    -- subscribe to the delegate <MPC_NotificationDelegate> 
+    -- myNotification.delegate = self;
+    -- implement the delegate method - (void) userDidTapMPC_NotificationView:
  
   **The display will auto dismiss after the display time is reached. Any UIGesture will also trigger a dismiss.
   
   **If you include an image asset, use either a 36 x 36 image (at 3 resolutions) or a single pdf vector image. 
-
-  ** To receive a callback when the user taps or pans the notifification, subscribe to the delegate by adding <MPC_NotificationDelegate> after the interface declaration of your calling class. Then set myNotificationView.delegate = self. Finally, implement the delegate method in your class, - (void) userDidTapMPC_NotificationView:
  
 <h3>Defaults:</h3>
 

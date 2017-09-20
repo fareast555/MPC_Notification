@@ -40,4 +40,4 @@ pod 'MPC_Notification', '~> 0.2.0'
   Pass nil as an alertTitle to display longer alert messages of up to two lines. This class will center the label accordingly for you.
 
 <h3>Version Update History:</h3>
-  ~> 0.2.0 Added a delegate callback with user taps notification (Pushed to CocoaPods 20 Sept 2017)
+  ~> 0.2.0 Added a delegate callback when user taps notification (Pushed to CocoaPods 20 Sept 2017)

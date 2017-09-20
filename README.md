@@ -27,10 +27,7 @@ pod 'MPC_Notification', '~> 0.2.0'
  
   3. Display the alert view: if (alert) [alert display]; Do not add this alert to your own hierarchy. The alert will do everything for you.
 
-  4. For a delegate callback on tap or pan gestures:
-    -- subscribe to the delegate <MPC_NotificationDelegate> 
-    -- myNotification.delegate = self;
-    -- implement the delegate method - (void) userDidTapMPC_NotificationView:
+  4. For a delegate callback on tap or pan gestures, subscribe to the delegate <MPC_NotificationDelegate>. Set the delegate on the instantiated view: myNotification.delegate = self. Then implement the delegate method -(void)userDidTapMPC_NotificationView:
  
   **The display will auto dismiss after the display time is reached. Any UIGesture will also trigger a dismiss.
   

@@ -30,9 +30,17 @@ pod 'MPC_Notification', '~> 0.2.0'
  
   2. Instantiate the view: 
   ```objectivec
-   MPC_Notification *alert = [[MPC_Notification alloc]initWithTitle:message:alertImage:backgroundColor:textColor:];
+   MPC_Notification *alert = [[MPC_Notification alloc]initWithTitle:message:alertImage:displayTime:];
 ```
 
+  3. Customize public properties as required
+  ```objectivec
+  @property (strong, nonatomic) UIColor * _Nullable alertTitleColor;
+  @property (strong, nonatomic) UIColor * _Nullable alertMessageColor;
+  @property (strong, nonatomic) UIFont * _Nullable alertTitleFont;
+  @property (strong, nonatomic) UIFont * _Nullable alertMessageFont;
+  @property (strong, nonatomic) UIColor * _Nullable alertBackgroundColor;
+```
  
   3. Display the alert view: 
   ```objectivec

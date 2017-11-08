@@ -42,14 +42,14 @@ pod 'MPC_Notification', '~> 0.2.0'
   @property (strong, nonatomic) UIColor * _Nullable alertBackgroundColor;
 ```
  
-  3. Display the alert view: 
+  4. Display the alert view: 
   ```objectivec
     if (alert) [alert display];
 ```
 
  Do not add this alert to your own hierarchy. The alert will do everything for you.
 
-  4. For a delegate callback on tap or pan gestures, subscribe to the delegate 
+  5. For a delegate callback on tap or pan gestures, subscribe to the delegate 
   ```objectivec
    <MPC_NotificationDelegate>
 ```

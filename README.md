@@ -21,7 +21,7 @@ Download this repo and copy the MPC_Notification{.h/.m} files into your project,
 
 ```ruby
 # For latest release, add this to your podfile
-pod 'MPC_Notification', '~> 0.2.0'
+pod 'MPC_Notification', '~> 0.2.1'
 ```
  
 <h3>To use:</h3>

@@ -23,6 +23,8 @@
 @property (nonatomic, assign) CGFloat alertHeight;
 @property (nonatomic, assign) CGFloat viewWidth;
 @property (nonatomic, assign) CGFloat textXOffset;
+@property (nonatomic, assign) CGFloat notchedPhoneYOffset;
+@property (nonatomic, assign) CGFloat notchedPhoneXOffset;
 @property (nonatomic, assign) CGFloat displayInterval;
 @property (nonatomic, assign) BOOL viewWasDismissed;
 
@@ -42,17 +44,16 @@
     UIView *view = [[[[UIApplication sharedApplication]delegate]window] viewWithTag:595847];
     if (view) {return nil;}
     
-    //2. Set global variables.
-    _displayInterval = (displayTime == 0) ? 4 : displayTime;
-    _alertHeight = 64;
-    _viewWidth = [UIScreen mainScreen].bounds.size.width;
-    _textXOffset = alertImage ? 64 : 15; //Slides text to left if no image
-    _viewWasDismissed = NO; //Flag set when dismiss is called
-    
-    //3. Call to super using main window width
-    if (self = [super initWithFrame:CGRectMake(0, -self.alertHeight, self.viewWidth, self.alertHeight)])
-    {
-        //4. Build view
+    //2. Call to super init
+    if (self = [super initWithFrame:CGRectZero]) {
+        
+        //3. Initialize variables
+        [self _configureiVarsWithImage:alertImage displayTime:displayTime];
+        
+        //4. Resize frame as required (to account for iPhoneX and notched devices)
+        [self setFrame:[self _frameAfterReset]];
+        
+        //5. Build view
         self.backgroundColor = [UIColor colorWithRed:0.733 green:0.192 blue:0.357 alpha:1];
         
         if (alertImage) { [self addSubview:[self imageViewWithImage:alertImage]];}
@@ -62,12 +63,38 @@
         [self addGestureRecognizer:[self pan]];
         [self setTag:595847];
         
-        //5. Add the subview to the application window
+        //6. Add the subview to the application window
         [[[[UIApplication sharedApplication] delegate] window] addSubview:self];
         
     }
 
     return self;
+}
+
+#pragma mark - Initial Setup
+- (void)_configureiVarsWithImage:(UIImage *)alertImage displayTime:(CGFloat)displayTime {
+    //2. Set global variables.
+    self.displayInterval = (displayTime == 0) ? 4 : displayTime;
+    self.alertHeight = 64;
+    self.viewWidth = [UIScreen mainScreen].bounds.size.width;
+    self.textXOffset = alertImage ? 64 : 15; //Slides text to left if no image
+    self.viewWasDismissed = NO; //Flag set when dismiss is called
+    self.notchedPhoneYOffset = 0;
+}
+- (CGRect)_frameAfterReset {
+    
+    //Adjust for iPhoneX
+    if (@available(iOS 11.0, *)) {
+        UIEdgeInsets i = [[[UIApplication sharedApplication]delegate]window].safeAreaInsets;
+        //Only need to adjust if in portrait on iPhoneX (landscape is 0 offest)
+        if (i.top > 0 || i.right > 0) {
+            
+            _notchedPhoneYOffset = i.top > 0 ? 24 : 0;
+            _notchedPhoneXOffset = i.left > 0 ? 24 : 0;
+            _alertHeight += _notchedPhoneYOffset;
+        }
+    }
+    return  CGRectMake(0, -(self.alertHeight), self.viewWidth, self.alertHeight);
 }
 
 #pragma mark - Setters for public properties
@@ -108,7 +135,7 @@
 
 - (UIImageView *) imageViewWithImage:(UIImage *)alertImage
 {
-    CGRect viewRect = CGRectMake(15, 14, 36, 36);
+    CGRect viewRect = CGRectMake(15 + self.notchedPhoneXOffset, 14 + self.notchedPhoneYOffset, 36, 36);
     UIImageView *view = [[UIImageView alloc]initWithFrame:viewRect];
     [view setImage:alertImage];
     return view;
@@ -116,7 +143,7 @@
 
 - (UILabel *)_title:(NSString *)alertTitle
 {
-    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.textXOffset, 14, self.frame.size.width-(self.textXOffset + 10), 20)];
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.textXOffset + self.notchedPhoneXOffset, 14 + self.notchedPhoneYOffset, self.frame.size.width-(self.textXOffset + self.notchedPhoneXOffset + 10), 20)];
     [self.titleLabel setText: alertTitle];
     [self.titleLabel setTextColor: [UIColor whiteColor]];
     [self.titleLabel setFont:[UIFont fontWithName:@"Avenir-Heavy" size:self.viewWidth > 321 ? 15.5 : 13]];
@@ -126,7 +153,7 @@
 
 - (UILabel *)_message:(NSString *)alertMessage
 {
-    self.messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.textXOffset, 32, self.frame.size.width-(self.textXOffset + 10), 20)];
+    self.messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.textXOffset  + self.notchedPhoneXOffset, 32 + self.notchedPhoneYOffset, self.frame.size.width-(self.textXOffset + self.notchedPhoneXOffset + 10), 20)];
     self.messageLabel.numberOfLines = self.titleLabel ? 1 : 2;
     [self.messageLabel setText:alertMessage];
     [self.messageLabel setTextColor:[UIColor whiteColor]];
@@ -146,7 +173,7 @@
     [messageLabel sizeToFit];
     
     //3. Set the new centered frame
-    [messageLabel setFrame:CGRectMake(x, (self.alertHeight - messageLabel.frame.size.height) / 2, messageLabel.frame.size.width, messageLabel.frame.size.height)];
+    [messageLabel setFrame:CGRectMake(x, ((self.alertHeight) - messageLabel.frame.size.height) / 2, messageLabel.frame.size.width, messageLabel.frame.size.height + self.notchedPhoneYOffset)];
     
     return messageLabel;
 }

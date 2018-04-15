@@ -76,3 +76,5 @@ Then implement the delegate method
 
 <h3>Version Update History:</h3>
   ~> 0.2.0 Added a delegate callback when user taps notification (Pushed to CocoaPods 20 Sept 2017)
+
+  ~> 0.2.1 Notifications now display correctly on iPhoneX, either flush with the top but showing below the notch in portrait, or regular height, but indented right if in landscape. Non-notched phone types are unaffected by this update. Enjoy! (Pushed to CocoaPods 16 April 2018)

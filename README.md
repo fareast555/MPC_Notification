@@ -10,8 +10,10 @@ To ensure that alerts do not cascade and cover each other up, the view will only
 
 ## Requirements
 
-* iOS 9.0+
+* iOS 10.0+
 * ARC
+
+Note that this is a breaking change if you are using 0.2.1 running iOS 9.
 
 ## Installation
 
@@ -21,7 +23,7 @@ Download this repo and copy the MPC_Notification{.h/.m} files into your project,
 
 ```ruby
 # For latest release, add this to your podfile
-pod 'MPC_Notification', '~> 0.2.1'
+pod 'MPC_Notification', '~> 1.1.2'
 ```
  
 <h3>To use:</h3>
@@ -78,3 +80,5 @@ Then implement the delegate method
   ~> 0.2.0 Added a delegate callback when user taps notification (Pushed to CocoaPods 20 Sept 2017)
 
   ~> 0.2.1 Notifications now display correctly on iPhoneX, either flush with the top but showing below the notch in portrait, or regular height, but indented right if in landscape. Non-notched phone types are unaffected by this update. Enjoy! (Pushed to CocoaPods 16 April 2018)
+  
+  ~>1.1.2  This is a breaking update for anyone using the 9.0 compatible 0.2.1. In addition to a version update, 1.1.2 includes a small patch that accounts for the top safe area insets of non-notched devices going from 0 to 20px. 

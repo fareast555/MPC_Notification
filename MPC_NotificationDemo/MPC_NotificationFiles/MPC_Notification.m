@@ -86,10 +86,11 @@
     //Adjust for iPhoneX
     if (@available(iOS 11.0, *)) {
         UIEdgeInsets i = [[[UIApplication sharedApplication]delegate]window].safeAreaInsets;
+       
         //Only need to adjust if in portrait on iPhoneX (landscape is 0 offest)
         if (i.top > 0 || i.right > 0) {
             
-            _notchedPhoneYOffset = i.top > 0 ? 24 : 0;
+            _notchedPhoneYOffset = i.top > 20 ? 24 : 0;
             _notchedPhoneXOffset = i.left > 0 ? 24 : 0;
             _alertHeight += _notchedPhoneYOffset;
         }

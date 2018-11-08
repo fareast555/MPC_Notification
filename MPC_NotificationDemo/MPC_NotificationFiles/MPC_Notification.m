@@ -83,10 +83,16 @@
 }
 - (CGRect)_frameAfterReset {
     
-    //Adjust for iPhoneX
-    if (@available(iOS 11.0, *)) {
+    //Adjust for notched devices
+    UIWindow *window = [[[UIApplication sharedApplication]delegate]window];
+    NSOperatingSystemVersion V11 = (NSOperatingSystemVersion){.majorVersion = 11};
+    if ( [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:V11] &&
+        [window respondsToSelector:@selector(safeAreaInsets)]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wpartial-availability"
         UIEdgeInsets i = [[[UIApplication sharedApplication]delegate]window].safeAreaInsets;
-       
+#pragma clang diagnostic pop
+        
         //Only need to adjust if in portrait on iPhoneX (landscape is 0 offest)
         if (i.top > 0 || i.right > 0) {
             
@@ -95,6 +101,7 @@
             _alertHeight += _notchedPhoneYOffset;
         }
     }
+    
     return  CGRectMake(0, -(self.alertHeight), self.viewWidth, self.alertHeight);
 }
 

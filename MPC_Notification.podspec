@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
 spec.name             = 'MPC_Notification'
-spec.version          = '1.1.2'
+spec.version          = '1.1.3'
 spec.summary          = 'A highly customizable slide-down alert similar to a UILocalNotification.'
 spec.description      = 'This CocoaPod allows you to display highly customizable in-app alerts. Alerts are dismissable with taps or pans.'
 
